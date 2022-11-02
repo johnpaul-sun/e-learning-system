@@ -1,7 +1,7 @@
-import React from "react";
+import MaintenancePage from "components/templates/MaintenancePage";
 
 const Login = () => {
-  return <div>Login</div>;
+  return <MaintenancePage />;
 };
 
 export default Login;

@@ -4,6 +4,12 @@
 
 A language e-learning system web application that users answers a group of words with a corresponding set of choices. Users can be able to interact with other users. Keeping track of their performance, as well as other people's performance. This project will also have its own administrator section, to manage categories as well as other user's information.
 
+## Servers
+- API: https://e-learning-system-2.herokuapp.com/
+- Client: https://e-learning-system.vercel.app/
+
+- [@johnpaul-sun](https://github.com/johnpaul-sun)
+
 ## Contributors
 
 - [@johnpaul-sun](https://github.com/johnpaul-sun)

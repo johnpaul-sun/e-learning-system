@@ -12,7 +12,7 @@ type Props = {
   setIsPassHidden?: (value: boolean) => void
 }
 
-const RegisterForm = ({
+const CustomForm = ({
   label,
   className,
   isPassHidden,
@@ -61,4 +61,4 @@ const RegisterForm = ({
   );
 };
 
-export default RegisterForm;
+export default CustomForm;

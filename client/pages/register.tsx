@@ -8,7 +8,7 @@ import NextHead from "components/atoms/NextHead";
 import { useAuthMethods } from "hooks/authMethods";
 import CopyRights from "components/atoms/CopyRights";
 import { RegisterFormSchema } from "shared/validation";
-import RegisterForm from "components/molecules/RegisterForm";
+import CustomForm from "components/molecules/CustomForm";
 
 const Register = () => {
   const { handleRegisterSubmit } = useAuthMethods();
@@ -42,27 +42,27 @@ const Register = () => {
                   <Form>
                     <div className="flex flex-col gap-6 ">
                       <div className="flex flex-row gap-5 mobile:flex-col">
-                        <RegisterForm
+                        <CustomForm
                           label="First Name"
                           name="first_name"
                           type="text"
                           placeholder="John"
                         />
-                        <RegisterForm
+                        <CustomForm
                           label="Last Name"
                           name="last_name"
                           type="text"
                           placeholder="Doe"
                         />
                       </div>
-                      <RegisterForm
+                      <CustomForm
                         label="Email address"
                         name="email"
                         type="email"
                         placeholder="john.doe@email.com"
                       />
                       <div className="flex flex-row gap-5 mobile:flex-col">
-                        <RegisterForm
+                        <CustomForm
                           label="Password"
                           name="password"
                           type={isPassHidden ? "password" : "text"}
@@ -70,7 +70,7 @@ const Register = () => {
                           isPassHidden={isPassHidden}
                           setIsPassHidden={setIsPassHidden}
                         />
-                        <RegisterForm
+                        <CustomForm
                           label="Confirm Password"
                           name="password_confirmation"
                           type={isPassHidden ? "password" : "text"}

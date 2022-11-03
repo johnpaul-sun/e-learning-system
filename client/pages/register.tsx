@@ -4,7 +4,7 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 
 import Button from "components/atoms/Button";
-import NextHead from "components/atoms/Head";
+import NextHead from "components/atoms/NextHead";
 import CopyRights from "components/atoms/CopyRights";
 import { RegisterFormSchema } from "shared/validation";
 import RegisterForm from "components/molecules/RegisterForm";
@@ -18,9 +18,6 @@ const Register = () => {
     password: "",
     password_confirmation: "",
   };
-  const onSubmit = () => {
-    console.log("Form submitted");
-  }
 
   return (
     <>
@@ -36,7 +33,7 @@ const Register = () => {
             <Formik
               initialValues={formikInitialValues}
               validationSchema={RegisterFormSchema}
-              onSubmit={onSubmit}
+              onSubmit={() => { }}
             >
               {({ isSubmitting }): any => {
                 return (

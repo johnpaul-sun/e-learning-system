@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import NextHead from "components/atoms/Head";
+import NextHead from "components/atoms/NextHead";
  
 const MaintenancePage = () => {
   return (

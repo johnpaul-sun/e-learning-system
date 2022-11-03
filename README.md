@@ -8,7 +8,6 @@ A language e-learning system web application that users answers a group of words
 - API: https://e-learning-system-2.herokuapp.com/
 - Client: https://e-learning-system.vercel.app/
 
-- [@johnpaul-sun](https://github.com/johnpaul-sun)
 
 ## Contributors
 

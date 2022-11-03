@@ -37,4 +37,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function id()
+    {
+        return auth('sanctum')->id();
+    } 
+
+    public static function registerUser($request)
+    {
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        $user->sendEmailVerificationNotification(); 
+        $user_id = $user->id;
+
+        $avatar = User::generateAvatar($request->first_name, $user_id);
+        $user->findOrFail($user_id)->update(["avatar" => $avatar]); 
+
+        return $user;
+    }
+
+    public static function generateAvatar($fname, $user_id)
+    {
+        $first_name = str_replace(' ', '', strtolower($fname));
+        return "https://api.multiavatar.com/$first_name&id=$user_id.png";
+    }
 }

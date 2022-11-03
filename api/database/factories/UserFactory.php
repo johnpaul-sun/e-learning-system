@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -15,19 +16,27 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    public static function replaceAndLower($value)
+    {
+        return str_replace(' ', '', strtolower($value));
+    }
+
     public function definition()
     {
-        $firstName = strtolower(fake()->firstName());
-        $lastName = strtolower(fake()->lastName());
+        static $user_id = 2;
+        $lastName = $this->replaceAndLower(fake()->lastName());
+        $firstName = $this->replaceAndLower(fake()->firstName());
 
         return [
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email' => "$firstName.$lastName@dummy.com",
-            'password' => bcrypt('password'), 
+            'password' => bcrypt('password'),
+            'avatar' => User::generateAvatar($firstName, $user_id++),
             'is_active' => false,
-            'is_admin' => true,
-            'email_verified_at' => now(),
+            'is_admin' => false,
+            'email_verified_at' => null,
             'remember_token' => Str::random(10),
         ];
     }

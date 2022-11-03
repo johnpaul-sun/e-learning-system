@@ -5,11 +5,13 @@ import React, { useState } from "react";
 
 import Button from "components/atoms/Button";
 import NextHead from "components/atoms/NextHead";
+import { useAuthMethods } from "hooks/authMethods";
 import CopyRights from "components/atoms/CopyRights";
 import { RegisterFormSchema } from "shared/validation";
 import RegisterForm from "components/molecules/RegisterForm";
 
 const Register = () => {
+  const { handleRegisterSubmit } = useAuthMethods();
   const [isPassHidden, setIsPassHidden] = useState<boolean>(true);
   const formikInitialValues = {
     first_name: "",
@@ -33,7 +35,7 @@ const Register = () => {
             <Formik
               initialValues={formikInitialValues}
               validationSchema={RegisterFormSchema}
-              onSubmit={() => { }}
+              onSubmit={handleRegisterSubmit}
             >
               {({ isSubmitting }): any => {
                 return (

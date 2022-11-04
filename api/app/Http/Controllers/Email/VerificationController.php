@@ -4,21 +4,22 @@ namespace App\Http\Controllers\Email;
 
 use App\Models\User; 
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class VerificationController extends Controller
 {
-    public function verify()
+    public function verify(Request $request)
     { 
         $client = env('APP_FRONTEND_URL');
-        $user_id = User::id();
+        $user_id = $request->id;
         $user = User::findOrFail($user_id);
-        
+
         if (!$user->hasVerifiedEmail()) {
-            $user->markEmailAsVerified(); 
+            $user->markEmailAsVerified();
             return redirect("$client/verify-email?user=$user_id&verified=true");
         }
         return redirect("$client/");
-    }
+    } 
 
     public function resend()
     {

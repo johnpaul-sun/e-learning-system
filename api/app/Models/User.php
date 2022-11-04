@@ -41,7 +41,7 @@ class User extends Authenticatable
     public static function id()
     {
         return auth('sanctum')->id();
-    } 
+    }
 
     public static function registerUser($request)
     {
@@ -51,11 +51,11 @@ class User extends Authenticatable
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        $user->sendEmailVerificationNotification(); 
+        $user->sendEmailVerificationNotification();
         $user_id = $user->id;
 
         $avatar = User::generateAvatar($request->first_name, $user_id);
-        $user->findOrFail($user_id)->update(["avatar" => $avatar]); 
+        $user->findOrFail($user_id)->update(["avatar" => $avatar]);
 
         return $user;
     }
@@ -64,5 +64,12 @@ class User extends Authenticatable
     {
         $first_name = str_replace(' ', '', strtolower($fname));
         return "https://api.multiavatar.com/$first_name&id=$user_id.png";
+    }
+
+    public static function setActiveStatus($status)
+    {
+        $user_id = auth('sanctum')->id();
+        $user = User::findOrFail($user_id);
+        $user->update(['is_active' => $status]); 
     }
 }

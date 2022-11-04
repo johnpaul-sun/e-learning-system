@@ -8,6 +8,7 @@ type Props = {
   label: string
   className?: string
   placeholder: string
+  defaultValue?: string
   isPassHidden?: boolean
   setIsPassHidden?: (value: boolean) => void
 }
@@ -15,6 +16,7 @@ type Props = {
 const CustomForm = ({
   label,
   className,
+  defaultValue,
   isPassHidden,
   setIsPassHidden = () => { },
   ...props
@@ -24,7 +26,7 @@ const CustomForm = ({
 
   return (
     <div className="w-full">
-      <label htmlFor="last_name" className="block text-md font-medium text-slate-200">
+      <label htmlFor="last_name" className="block text-md font-medium text-slate-200 mb-1">
         <small className="text-failed">*</small> {label}
       </label>
       <div>
@@ -32,7 +34,7 @@ const CustomForm = ({
           <input
             {...field}
             {...props}
-            value={field?.value || ""}
+            value={field?.value || defaultValue || ""}
             className={`
               px-2 pb-1
               placeholder-text-failed  

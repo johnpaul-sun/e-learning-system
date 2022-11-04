@@ -1,9 +1,9 @@
 export type LoginRegisterFormValues = {
-  first_name: string;
-  last_name: string;
+  first_name?: string;
+  last_name?: string;
   email: string;
   password: string;
-  password_confirmation: string;
+  password_confirmation?: string;
 };
 
 export type AxiosResponseError = {
@@ -19,3 +19,5 @@ export type SignInUpFormFields =
   | 'password_confirmation';
 
 export type User = any;
+
+export type Cookie = string | boolean | any; 

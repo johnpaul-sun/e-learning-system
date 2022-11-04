@@ -6,8 +6,10 @@ import { Toaster } from 'react-hot-toast'
 
 import '../styles/globals.css'
 import NextProgress from 'shared/lib/next-progress'
+import useHydrationBypass from 'hooks/useHydrationBypass'
 
 export default function App({ Component, ...rest }: AppProps) {
+  useHydrationBypass();
   const { store, props } = wrapper.useWrappedStore(rest)
 
   return (

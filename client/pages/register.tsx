@@ -9,18 +9,18 @@ import NextHead from "components/atoms/NextHead";
 import { useAuthMethods } from "hooks/authMethods";
 import CopyRights from "components/atoms/CopyRights";
 import { RegisterFormSchema } from "shared/validation";
-import CustomForm from "components/molecules/CustomForm";
+import CustomForm from "components/molecules/CustomForm"; 
 
 const Register = () => {
-  const { handleRegisterSubmit } = useAuthMethods();
   const [isPassHidden, setIsPassHidden] = useState<boolean>(true);
+  const { handleRegisterSubmit } = useAuthMethods();
   const formikInitialValues = {
     first_name: "",
     last_name: "",
     email: "",
     password: "",
     password_confirmation: "",
-  };
+  }; 
 
   return (
     <>
@@ -34,9 +34,9 @@ const Register = () => {
           <div className="max-w-[450px] flex flex-col gap-10 w-full py-20 px-10 mobile:px-6">
             <h1 className="text-5xl font-bold text-white text-center mb-5">Join us now</h1>
             <Formik
+              onSubmit={handleRegisterSubmit}
               initialValues={formikInitialValues}
               validationSchema={RegisterFormSchema}
-              onSubmit={handleRegisterSubmit}
             >
               {({ isSubmitting }): any => {
                 return (

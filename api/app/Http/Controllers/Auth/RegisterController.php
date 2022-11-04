@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'user' => new UserResource(User::findOrFail($user_id)),
-            'message' => "We have sent an email verification link to your registered email, please check the spam folder if you did not receive any emails from us.",
+            'message' => "We have sent an email verification link to your registered email. Please check the spam folder if you did not receive any emails from us.",
             'token' => $token
         ]);
     }

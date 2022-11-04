@@ -1,57 +1,65 @@
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'; 
 
+import { 
+  reset, 
+  login, 
+  logout, 
+  register, 
+  resendVerification 
+} from 'redux/auth/authSlice'; 
+import { useAppDispatch } from 'hooks/reduxSelector';
 import { LoginRegisterFormValues } from 'shared/types';
-import { useAppDispatch, useAppSelector } from 'hooks/reduxSelector';
-import { reset, login, logout, register } from 'redux/auth/authSlice';
 
 export const useAuthMethods = () => {
-  const { error } = useAppSelector((state: any) => state.auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleAuthSignOut = async () => {
+  const handleAuthLogout = async () => {
     dispatch(reset());
-    toast.promise(
-      dispatch(logout()).then(() => {
-        router.push('/');
-      }),
-      {
-        loading: 'Logging out...',
-        success: 'You have successfully signed out',
-        error: error.content,
-      }
-    );
+    dispatch(logout()).then(() => {
+      toast.success('You have successfully signed out');
+      router.push('/login');
+    });
   };
 
   const handleLoginSubmit = async (
     data: LoginRegisterFormValues
   ): Promise<void> => {
-    toast.promise(dispatch(login(data)), {
-      loading: 'Logging in...',
-      success: 'Welcome to dashboard!',
-      error: error.content,
+    dispatch(login(data)).then(({ payload }) => {
+      const { content, status } = payload || {};
+
+      if (status) return toast.error(content?.email);
+      toast.success('Welcome to dashboard!');
+      router.push('/');
     });
   };
 
   const handleRegisterSubmit = async (
     data: LoginRegisterFormValues
   ): Promise<void> => {
-    toast.promise(
-      dispatch(register(data)).then(() => {
-        router.push('/');
-      }),
-      {
-        loading: 'Creating your account please wait...',
-        success: 'Account created successfully!',
-        error: error.content,
-      }
-    );
+    const creatingAccount = toast.loading('Creating your account...');
+
+    dispatch(register(data)).then(({ payload }) => {
+      const { status, message } = payload || {};
+      toast.dismiss(creatingAccount);
+
+      if (status) toast.error('Something went wrong.\nPlease try again later.'); 
+      toast.success('Account created successfully!');
+      router.push('/verify-email');
+    });
+  };
+
+  const handleResendVerification = async (): Promise<void> => {
+    dispatch(resendVerification()).then(() => {
+      toast.success('Email verification link sent on your Email address'); 
+    });
   };
 
   return {
-    handleAuthSignOut,
+    handleAuthLogout,
     handleLoginSubmit,
     handleRegisterSubmit,
+    handleResendVerification,
   };
 };

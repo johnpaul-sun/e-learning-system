@@ -78,7 +78,7 @@ const Login = () => {
                       </div>
                       <Link href="./forgot-password"><h1 className="ml-2 text-xs text-gray-200">Forgot Password?</h1></Link>
                     </div> 
-                    <Button isDisabled={isSubmitting} value="Register" className="mt-10" />
+                    <Button isDisabled={isSubmitting} value="Login" className="mt-10" />
                   </Form>
                 )
               }}

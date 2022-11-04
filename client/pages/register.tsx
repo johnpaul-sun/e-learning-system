@@ -78,7 +78,7 @@ const Register = () => {
                         />
                       </div>
                     </div>
-                    <Button isSubmitting={isSubmitting} value="Register" className="mt-10" />
+                    <Button isDisabled={isSubmitting} value="Register" className="mt-10" />
                   </Form>
                 )
               }}

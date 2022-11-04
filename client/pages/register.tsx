@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 
+import Logo from "components/atoms/Logo";
 import Button from "components/atoms/Button";
 import NextHead from "components/atoms/NextHead";
 import { useAuthMethods } from "hooks/authMethods";
@@ -25,7 +26,7 @@ const Register = () => {
     <>
       <NextHead title="ELS | Register" />
       <main className="flex flex-row bg-els-60 h-full min-h-screen relative overflow-y-auto">
-        <img src="/images/logo.png" alt="logo" className="h-[60px] w-[45px] mobile:h-[36px] mobile:w-[24px] absolute top-6 left-6" />
+        <Logo />
         <div className="bg-els-10 w-[60%] p-5 flex justify-center items-center tablet:hidden mobile:hidden">
           <img src="/images/register-img.png" className="max-h-[400px] max-w-[500px]" alt="register" />
         </div>
@@ -86,9 +87,7 @@ const Register = () => {
             <div className="flex flex-col gap-3 justify-center items-center mobile:mb-10">
               <span className="block text-md font-medium text-slate-300">
                 Already have an account?
-                <span
-                  className="text-els-10 cursor-pointer hover:text-els-10/70 ml-1"
-                >
+                <span className="text-els-10 cursor-pointer hover:text-els-10/70 ml-1" >
                   <Link href="./login">Login</Link>
                 </span>
               </span>

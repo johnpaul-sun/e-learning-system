@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 
 import { axios, setBearerToken } from 'shared/lib/axios';
 import { LoginRegisterFormValues } from 'shared/types';
@@ -48,10 +48,16 @@ const hydrateUserState = async (): Promise<any> => {
   return 'Something went wrong';
 };
 
+const getAuthUser = async (): Promise<any> => {
+  const response = await axios.get('/auth');
+  return response.data;
+};
+
 const authService = {
   login,
   logout,
   register,
+  getAuthUser,
   hydrateUserState,
   resendVerification,
 };

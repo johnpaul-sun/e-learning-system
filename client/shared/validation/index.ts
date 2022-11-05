@@ -18,9 +18,9 @@ export const RegisterFormSchema = Yup.object().shape({
   password: Yup.string()
     .required('Password is required')
     .min(4, 'Password length should be at least 4 characters')
-    .max(12, 'Password cannot exceed more than 12 characters'),
+    .max(18, 'Password cannot exceed more than 18 characters'),
   password_confirmation: Yup.string()
     .required('Confirm Password is required')
-    .max(12, 'Password cannot exceed more than 12 characters')
+    .max(18, 'Password cannot exceed more than 18 characters')
     .oneOf([Yup.ref('password')], 'Passwords do not match'),
 });

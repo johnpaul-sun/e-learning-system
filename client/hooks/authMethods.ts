@@ -1,13 +1,13 @@
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router';
 
-import { 
-  reset, 
-  login, 
-  logout, 
-  register, 
-  resendVerification 
-} from 'redux/auth/authSlice'; 
+import {
+  reset,
+  login,
+  logout,
+  register,
+  resendVerification,
+} from 'redux/auth/authSlice';
 import { useAppDispatch } from 'hooks/reduxSelector';
 import { LoginRegisterFormValues } from 'shared/types';
 
@@ -44,15 +44,16 @@ export const useAuthMethods = () => {
       const { status, message } = payload || {};
       toast.dismiss(creatingAccount);
 
-      if (status) toast.error('Something went wrong.\nPlease try again later.'); 
+      if (status) toast.error('Something went wrong.\nPlease try again later.');
       toast.success('Account created successfully!');
       router.push('/verify-email');
     });
   };
 
   const handleResendVerification = async (): Promise<void> => {
-    dispatch(resendVerification()).then(() => {
-      toast.success('Email verification link sent on your Email address'); 
+    dispatch(resendVerification());
+    toast.success('Email verification link sent on your Email address', {
+      duration: 9000,
     });
   };
 

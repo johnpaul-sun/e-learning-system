@@ -5,4 +5,5 @@ const ForgotPassword = () => {
   return <MaintenancePage />;
 };
 
+export { authCheck as getServerSideProps } from 'utils/getServerSideProps'
 export default ForgotPassword;

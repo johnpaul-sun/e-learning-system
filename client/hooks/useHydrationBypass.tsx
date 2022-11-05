@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useHydrationBypass = (): any => {
+const useHydrationBypass = (condition: boolean): any => {
   const [showChild, setShowChild] = useState(false);
 
   useEffect(() => {
@@ -14,6 +14,8 @@ const useHydrationBypass = (): any => {
   if (typeof window === 'undefined') {
     return <></>;
   }
+
+  return condition && <></>
 }
 
 export default useHydrationBypass;

@@ -100,4 +100,5 @@ const Register = () => {
   );
 };
 
+export { loginRegisterAuthChecker as getServerSideProps } from 'utils/getServerSideProps'
 export default Register;

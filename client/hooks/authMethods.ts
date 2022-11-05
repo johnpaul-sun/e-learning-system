@@ -53,7 +53,6 @@ export const useAuthMethods = () => {
         content: { email },
       } = payload || {};
       toast.dismiss(creatingAccount);
-      console.log(status, email, payload);
 
       if (status >= 400) {
         toast.error(email || 'Something went wrong.\nPlease try again later.');

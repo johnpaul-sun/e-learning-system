@@ -1,5 +1,6 @@
+import Router from 'next/router';
 const redirect = (path:string)=>{
-  window.location.href = path;
+  return Router.push(path);
 }
 
 export default redirect;

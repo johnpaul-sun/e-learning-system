@@ -2,16 +2,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Formik, Form } from "formik";
+import { getCookie } from "cookies-next";
 
 import Logo from "components/atoms/Logo";
 import Button from "components/atoms/Button";
 import useRememberMe from "hooks/useRememberMe";
 import NextHead from "components/atoms/NextHead";
 import { useAuthMethods } from "hooks/authMethods";
-import CopyRights from "components/atoms/CopyRights";
 import { LoginFormSchema } from "shared/validation";
+import CopyRights from "components/atoms/CopyRights";
 import CustomForm from "components/molecules/CustomForm";
-import { getCookie } from "cookies-next";
 
 const Login = () => {
   const {
@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <>
-      <NextHead title="ELS | Register" />
+      <NextHead title="ELS | Login" />
       <main className="flex flex-row bg-els-60 h-full min-h-screen relative overflow-y-auto">
         <Logo/>
         <div className="bg-els-10 w-[60%] p-5 flex justify-center items-center tablet:hidden mobile:hidden">

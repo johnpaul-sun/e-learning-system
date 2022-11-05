@@ -43,10 +43,10 @@ export const authCheck: GetServerSideProps = wrapper.getServerSideProps(
         const emailVerified = res.data?.email_verified_at;
         const verifyPage = req.url?.includes('verify-email');
         const linkClicked =
-          req.url?.includes('user') && req.url?.includes('verified');
+          req.url?.includes('user') && req.url?.includes('verified'); 
 
         if (verifyPage && emailVerified) {
-          if (linkClicked) return {  props: {}};
+          if (linkClicked) return { props: {} };
           return {
             redirect: {
               permanent: false,
@@ -63,17 +63,26 @@ export const authCheck: GetServerSideProps = wrapper.getServerSideProps(
           };
         }
 
-        if (
-          req.url?.includes('overview') ||
-          req.url?.includes('chat') ||
-          req.url?.includes('board')
-        ) {
-          await axios.get(
-            `/api/project/${params?.id}/member/${res.data.id}`,
-            config
-          );
+        const forgotPasswordPage = req.url?.includes('forgot-password');
+        if (forgotPasswordPage && emailVerified) {
+          if (linkClicked) return { props: {} };
+          return {
+            redirect: {
+              permanent: false,
+              destination: '/',
+            },
+          };
         }
+
+        // if (
+        //   req.url?.includes('private-page')
+        // ) {
+        //   await axios.get(`/fetch-data`,config);
+        // }
       } catch (error: any) {
+        const forgotPasswordPage = req.url?.includes('forgot-password');
+        
+        if (forgotPasswordPage) return { props: {} };
         if (error.response.status === 404) {
           return {
             notFound: true,

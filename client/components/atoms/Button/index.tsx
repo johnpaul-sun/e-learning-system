@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  value: string;
+  value: string | any;
   className?: string
   isDisabled?: boolean 
   onClick?: (value?: any) => void

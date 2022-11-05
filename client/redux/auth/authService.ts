@@ -27,6 +27,11 @@ const login = async (user: LoginRegisterFormValues): Promise<any> => {
   return data;
 };
 
+const getAuthUser = async (): Promise<any> => {
+  const response = await axios.get('/auth');
+  return response.data;
+};
+
 const logout = async (): Promise<any> => {
   const response = await axios.post('/logout');
   if (response.status === 204) {
@@ -35,8 +40,18 @@ const logout = async (): Promise<any> => {
   return response.data;
 };
 
+const resetPassword = async (data: any): Promise<any> => {
+  const response = await axios.post('/user/reset-password', data);
+  return response.data;
+};
+
 const resendVerification = async (): Promise<any> => {
-  const response = await axios.get('/user/email/resend'); 
+  const response = await axios.get('/user/email/resend');
+  return response.data;
+};
+
+const requestPasswordResetLink = async (email: any): Promise<any> => {
+  const response = await axios.post('/user/forgot-password', { email });
   return response.data;
 };
 
@@ -48,18 +63,15 @@ const hydrateUserState = async (): Promise<any> => {
   return 'Something went wrong';
 };
 
-const getAuthUser = async (): Promise<any> => {
-  const response = await axios.get('/auth');
-  return response.data;
-};
-
 const authService = {
   login,
   logout,
   register,
   getAuthUser,
+  resetPassword,
   hydrateUserState,
   resendVerification,
+  requestPasswordResetLink,
 };
 
 export default authService;

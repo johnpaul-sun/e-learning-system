@@ -1,18 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { removeCookies, getCookie } from "cookies-next";
 
-import useTimer from "hooks/useTimer";
-import redirect from "utils/redirect";
+import useTimer from "hooks/useTimer"; 
 import Button from "components/atoms/Button";
 import useIsVerified from "hooks/useIsVerified";
 import { getAuthUser } from "redux/auth/authSlice";
 import { useAuthMethods } from "hooks/authMethods";
 import { useAppDispatch } from "hooks/reduxSelector";
 import useHydrationBypass from "hooks/useHydrationBypass";
-import { useEffect } from "react";
 import Loading from "components/templates/Loading/Loading";
 
 const VerifyEmail = () => {
@@ -42,7 +41,7 @@ const VerifyEmail = () => {
 
   const VerificationPage = () => {
     return (
-      <div className="bg-els-30 h-screen w-screen min-h-full flex justify-center items-center">
+      <div className="bg-els-30 h-screen w-screen min-h-full flex justify-center items-center mobile:p-5">
         <div className="bg-els-60 max-w-[420px] w-full rounded-md">
           <div className="bg-els-10 py-3 px-5 flex flex-row justify-between rounded-t-md">
             <img src="/images/logo.png" alt="logo" className="h-[30px] w-[24px]" />

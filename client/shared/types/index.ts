@@ -1,8 +1,8 @@
 export type LoginRegisterFormValues = {
   first_name?: string;
   last_name?: string;
-  email: any;
-  password: string;
+  email?: any;
+  password?: string;
   password_confirmation?: string;
 };
 

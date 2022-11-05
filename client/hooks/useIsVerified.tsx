@@ -38,7 +38,7 @@ const useIsVerified = () => {
     MySwal.fire({
       icon: 'success',
       title: 'Email Verified',
-      text: 'Thank you for verifying your email address!!',
+      text: 'Thank you for verifying your email address!',
       confirmButtonText: 'Go to Dashboard',
       footer: `<span style="color:#F6F6F6">This page will be automatically redirected to dashboard in <b>3</b>s.</span>`,
       timer: 3000,

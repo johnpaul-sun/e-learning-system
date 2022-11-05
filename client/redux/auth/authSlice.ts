@@ -8,7 +8,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import authService from './authService';
 import { catchError } from 'utils/handleAxiosError';
-import { LoginRegisterFormValues, User, AxiosResponseError } from 'shared/types';
+import {
+  LoginRegisterFormValues,
+  User,
+  AxiosResponseError,
+} from 'shared/types';
 
 type InitialState = {
   user: any;
@@ -51,6 +55,17 @@ export const login = createAsyncThunk(
   }
 );
 
+export const getAuthUser = createAsyncThunk(
+  'auth/getAuthUser',
+  async (_, thunkAPI) => {
+    try {
+      return await authService.getAuthUser();
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(catchError(error));
+    }
+  }
+);
+
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     return await authService.logout();
@@ -58,6 +73,17 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(catchError(error));
   }
 });
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword',
+  async (data: any, thunkAPI) => {
+    try {
+      return await authService.resetPassword(data);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(catchError(error));
+    }
+  }
+);
 
 export const resendVerification = createAsyncThunk(
   'auth/resendVerification',
@@ -70,11 +96,11 @@ export const resendVerification = createAsyncThunk(
   }
 );
 
-export const getAuthUser = createAsyncThunk(
-  'auth/getAuthUser',
-  async (_, thunkAPI) => {
+export const requestPasswordResetLink = createAsyncThunk(
+  'auth/requestPasswordResetLink',
+  async (email: string, thunkAPI) => {
     try {
-      return await authService.getAuthUser();
+      return await authService.requestPasswordResetLink(email);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(catchError(error));
     }
@@ -220,22 +246,28 @@ export const authSlice = createSlice({
       .addCase(resendVerification.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(resendVerification.fulfilled, (state, action: PayloadAction<User>) => {
-        state.isSuccess = true;
-        state.isLoading = false;
-        state.user = action.payload;
-        state.error = {
-          status: 0,
-          content: null,
-        };
-      })
-      .addCase(resendVerification.rejected, (state, action: PayloadAction<any>) => {
-        state.isError = true;
-        state.isSuccess = false;
-        state.isLoading = false;
-        state.error = action.payload;
-        state.user = null;
-      });
+      .addCase(
+        resendVerification.fulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.isSuccess = true;
+          state.isLoading = false;
+          state.user = action.payload;
+          state.error = {
+            status: 0,
+            content: null,
+          };
+        }
+      )
+      .addCase(
+        resendVerification.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.isError = true;
+          state.isSuccess = false;
+          state.isLoading = false;
+          state.error = action.payload;
+          state.user = null;
+        }
+      );
   },
 });
 

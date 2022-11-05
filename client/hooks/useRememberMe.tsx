@@ -3,11 +3,15 @@ import {
   setCookie,
   deleteCookie
 } from "cookies-next";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { Cookie } from "shared/types";
 
 const useRememberMe = () => {
   const [rememberMe, setRememberMe] = useState<string>("");
+
+  useEffect(() => {
+    deleteCookie("request_link_to");
+  }, [])
 
   const rememberedEmail: Cookie = getCookie('email') || "";
   const isRemembered: Cookie = getCookie('isRemembered') || false;

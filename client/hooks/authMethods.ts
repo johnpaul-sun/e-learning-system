@@ -1,3 +1,4 @@
+
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -48,15 +49,11 @@ export const useAuthMethods = () => {
     const creatingAccount = toast.loading('Creating your account...');
 
     dispatch(register(data)).then(({ payload }) => {
-      const {
-        status,
-        content: { email },
-      } = payload || {};
+      const { status, content } = payload || {};
       toast.dismiss(creatingAccount);
-      console.log(status, email, payload);
 
       if (status >= 400) {
-        toast.error(email || 'Something went wrong.\nPlease try again later.');
+        toast.error(content?.email || 'Something went wrong.\nPlease try again later.');
       } else {
         toast.success('Account created successfully!');
         router.push('/verify-email');
@@ -116,8 +113,7 @@ export const useAuthMethods = () => {
       toast.dismiss(checkingAccount);
 
       if (status >= 400)
-        return toast.error('We cannot find your email addres.', duration);
-      toast.dismiss(checkingAccount);
+        return toast.error('We cannot find your email addres.', duration); 
       if (message === 'Please wait before retrying.') {
       } else {
         toast.success(message, duration);

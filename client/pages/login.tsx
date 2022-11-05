@@ -9,8 +9,9 @@ import useRememberMe from "hooks/useRememberMe";
 import NextHead from "components/atoms/NextHead";
 import { useAuthMethods } from "hooks/authMethods";
 import CopyRights from "components/atoms/CopyRights";
-import { RegisterFormSchema } from "shared/validation";
+import { LoginFormSchema } from "shared/validation";
 import CustomForm from "components/molecules/CustomForm";
+import { getCookie } from "cookies-next";
 
 const Login = () => {
   const {
@@ -20,10 +21,11 @@ const Login = () => {
     onChangeRemember,
   } = useRememberMe();
   const { handleLoginSubmit } = useAuthMethods();
+  const initialEmailValue = getCookie("email") || "";
   const [isPassHidden, setIsPassHidden] = useState<boolean>(true);
 
   const formikInitialValues = {
-    email: "",
+    email: initialEmailValue,
     password: ""
   };
 
@@ -40,10 +42,10 @@ const Login = () => {
             <h1 className="text-5xl font-bold text-white text-center mb-5 mobile:text-4xl">Welcome Back</h1>
             <Formik
               initialValues={formikInitialValues}
-              validationSchema={RegisterFormSchema}
+              validationSchema={LoginFormSchema}
               onSubmit={handleLoginSubmit}
             >
-              {({ isSubmitting }): any => {
+              {({ isSubmitting }): any => { 
                 return (
                   <Form>
                     <div className="flex flex-col gap-6 " onChange={onChangeRemember}>
@@ -99,4 +101,5 @@ const Login = () => {
   );;
 };
 
+export { loginRegisterAuthChecker as getServerSideProps } from 'utils/getServerSideProps'
 export default Login;

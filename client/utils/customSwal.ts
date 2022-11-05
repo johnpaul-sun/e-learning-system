@@ -1,6 +1,6 @@
 export const swalDark = {
-  titleColor: '#F6F6F6',
-  color: '#CBD5E1',
-  background: '#475569',
   confirmButtonColor: '#0081F9',
+  background: '#303030',
+  color: '#F6F6F6',
+  backdrop: '#94A3B8',
 };

@@ -70,6 +70,17 @@ export const resendVerification = createAsyncThunk(
   }
 );
 
+export const getAuthUser = createAsyncThunk(
+  'auth/getAuthUser',
+  async (_, thunkAPI) => {
+    try {
+      return await authService.getAuthUser();
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(catchError(error));
+    }
+  }
+);
+
 export const hydrateUserState = createAsyncThunk(
   'auth/hydrateUserState',
   async (_, thunkAPI) => {
@@ -103,7 +114,7 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action: PayloadAction<User>) => { 
+      .addCase(register.fulfilled, (state, action: PayloadAction<User>) => {
         state.isSuccess = true;
         state.isLoading = false;
         state.user = action.payload.data;
@@ -186,7 +197,45 @@ export const authSlice = createSlice({
           state.error = action.payload;
           state.user = null;
         }
-      );
+      )
+      .addCase(getAuthUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAuthUser.fulfilled, (state, action: PayloadAction<User>) => {
+        state.isSuccess = true;
+        state.isLoading = false;
+        state.user = action.payload;
+        state.error = {
+          status: 0,
+          content: null,
+        };
+      })
+      .addCase(getAuthUser.rejected, (state, action: PayloadAction<any>) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.isLoading = false;
+        state.error = action.payload;
+        state.user = null;
+      })
+      .addCase(resendVerification.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resendVerification.fulfilled, (state, action: PayloadAction<User>) => {
+        state.isSuccess = true;
+        state.isLoading = false;
+        state.user = action.payload;
+        state.error = {
+          status: 0,
+          content: null,
+        };
+      })
+      .addCase(resendVerification.rejected, (state, action: PayloadAction<any>) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.isLoading = false;
+        state.error = action.payload;
+        state.user = null;
+      });
   },
 });
 

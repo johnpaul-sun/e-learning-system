@@ -1,3 +1,4 @@
+
 import { GetServerSideProps } from 'next';
 
 import { setAuth } from 'redux/auth/authSlice';
@@ -72,13 +73,7 @@ export const authCheck: GetServerSideProps = wrapper.getServerSideProps(
               destination: '/',
             },
           };
-        }
-
-        // if (
-        //   req.url?.includes('private-page')
-        // ) {
-        //   await axios.get(`/fetch-data`,config);
-        // }
+        } 
       } catch (error: any) {
         const forgotPasswordPage = req.url?.includes('forgot-password');
         
